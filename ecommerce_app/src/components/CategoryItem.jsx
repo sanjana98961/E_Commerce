@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const CategoryItem = ({item}) => {
   return (
-    <div id='Container' className='flex-1 m-[3px] h-[70vh] relative '>
+    <div id='Container' className='flex-1 m-[3px] h-[60vh] relative '>
         <Link to={`/productlist/${item.cat}`}>
           <img id='Image' className='w-[100%] h-[100%] object-cover' src={item.img}></img>
           <div id='Info' className='absolute w-[100%] h-[100%] top-0 left-0 justify-center flex items-center flex-col'>

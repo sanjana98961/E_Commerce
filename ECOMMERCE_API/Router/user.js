@@ -4,6 +4,7 @@ const { verifyToken, verifyAuthorizaiton, verifyAdmin } = require("./verifyToken
 
 const router = require("express").Router();
 
+
 //UPDATE
 router.put("/:id", verifyAuthorizaiton, async (req,res)=>{
 if(req.body.password){

@@ -5,8 +5,10 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import { useMediaQuery } from 'react-responsive';
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {publicRequest} from "../requestMethod"
+import { addProduct, updateQuantity } from '../Redux/CartRedux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
@@ -17,17 +19,19 @@ const Product = () => {
 
  const [product, setProduct] = useState({});
  const [quantity, setQuantity] = useState(1);
- const [color, setColor] = useState(" ");
- const [size, setSize] = useState(" ");
-
+ const [color, setColor] = useState("");
+ const [size, setSize] = useState("");
+ const dispatch =useDispatch()
+ const cart = useSelector((state)=>state.cart)
+ console.log({cart})
 
 
  useEffect(()=>{
   const getProduct = async ()=>{
      try {
+      if(!id) return                                 
        const res = await publicRequest.get( "/products/find/"+id)
        setProduct(res.data)
-       console.log(res.data)
      } catch (err) {
        console.log({err})
      }
@@ -35,9 +39,8 @@ const Product = () => {
   getProduct();
  }, [id]);
 
-
  const handleQuantity = (type)=>{
-  if(type == "Decrease"){
+  if(type === "Decrease"){
     // quantity > 1 && setQuantity(quantity - 1)
     setQuantity(quantity> 1 ? quantity-1 : 1)
   }else(
@@ -45,14 +48,23 @@ const Product = () => {
   )
  }
 
+  // useEffect(() => {
+  //   const cartProduct = cart.find((item) => item._id === id);
+  //   if (cartProduct) {
+  //     setQuantity(cartProduct.quantity);
+  //   }
+  // }, [cart, id]);
 
- const handleClick = ()=>{
+// const handleQuantity = (type) => {
+//   dispatch(updateQuantity({ type, id: product._id }));
+//   console.log({type,id})
+// };
 
+console.log({quantity})
+
+ const handleCartClick = ()=>{
+    dispatch(addProduct({...product, quantity, color, size}))
  }
-
-
-
-
 
 
   return (
@@ -66,10 +78,10 @@ const Product = () => {
         <div className={`flex-1 p-0 ${isMobile ? "p-2" : "p-10"}`}>
           <h1 className="font-bold text-2xl">{product.title} </h1>
           <p className="my-5">{product.desc}</p>
-          <span className="font-light text-4xl">{product.price}</span>
+          <span className="font-light text-4xl">${product.price}</span>
           <div className={`w-1/2 my-7 flex justify-between ${isMobile ? "w-full" : ""}`}>
             <div className="flex items-center">
-              <span className="text-lg font-light">Color</span>
+              <span className="text-lg font-light">Color: </span>
               {/* {product.color.map((c)=>{<div className="w-5 h-5  rounded-full mx-1 cursor-pointer" style={{ color: c }} key={c}>  </div>})} */}
 
               <div onClick={()=> setColor()} className="w-5 h-5 rounded-full mx-1 cursor-pointer">{product.color}</div>
@@ -78,20 +90,12 @@ const Product = () => {
               <div className="w-5 h-5 bg-blue-900 rounded-full mx-1 cursor-pointer"></div>
               <div className="w-5 h-5 bg-gray-500 rounded-full mx-1 cursor-pointer"></div> */}
             </div>
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
               <span className="text-lg font-light">Size</span>
               <select onChange={(e)=> setSize(e.target.value)} className="ml-2 p-2 border-2 border-gray-300 rounded">
-
               <option>{product.size}</option>
-
-                {/* {product.size.map((s)=>{<option key={s}> {s} </option>})} */}
-                {/* <option>XS</option>
-                <option>S</option>
-                <option>M</option>
-                <option>L</option>
-                <option>XL</option> */}
               </select>
-            </div>
+            </div> */}
           </div>
           <div className={`w-1/2 flex items-center justify-between ${isMobile ? "w-full" : ""}`}>
             <div className="flex items-center font-bold">
@@ -99,7 +103,9 @@ const Product = () => {
               <span className="w-8 h-8 rounded-lg border border-teal-500 flex items-center justify-center mx-1">{quantity}</span>
               <Add style={{cursor:"pointer"}} onClick={()=>handleQuantity("Increase")}/>
             </div>
-            <button onClick={handleClick} className="p-4 border-2 border-teal-500 bg-white cursor-pointer font-medium rounded-lg hover:bg-gray-100">ADD TO CART</button>
+            <Link to="/cart">
+            <button onClick={handleCartClick} className="p-4 border-2 border-teal-500 bg-white cursor-pointer font-medium rounded-lg hover:bg-green-300">ADD TO CART</button>
+            </Link>
           </div>
         </div>
       </div>

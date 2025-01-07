@@ -40,7 +40,7 @@ router.delete("/", verifyAdmin, async (req,res)=>{
 
 //GET PRODUCT
 router.get("/find/:id", async (req,res)=>{
-    try {
+    try { 
        const findProduct= await Product.findById(req.params.id);
        res.status(200).json(findProduct) 
     } catch (err) {

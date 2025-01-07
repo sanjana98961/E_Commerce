@@ -42,7 +42,7 @@ router.delete("/", verifyAuthorizaiton, async (req,res)=>{
 //GET USER CART
 router.get("/find/:userId", verifyAuthorizaiton, async (req,res)=>{
     try {
-       const findCart= await Cart.find({userId: req.params.userId});
+       const findCart= await Cart.findOne({userId: req.params.userId});
        res.status(200).json(findCart) 
     } catch (err) {
         res.status(500).json(err)
