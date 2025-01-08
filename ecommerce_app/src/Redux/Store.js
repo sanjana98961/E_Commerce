@@ -1,7 +1,7 @@
 import {configureStore} from "@reduxjs/toolkit"
 import { combineReducers } from "@reduxjs/toolkit"
-import cartReducer from "../Redux/CartRedux"
-import userReducer from "../Redux/UserRedux"
+import cartReducer from "./Cartredux"
+import userReducer from "./Useredux"
 import {
     persistStore,
     persistReducer,

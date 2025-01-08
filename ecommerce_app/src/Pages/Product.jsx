@@ -7,7 +7,7 @@ import Newsletter from "../components/Newsletter";
 import { useMediaQuery } from 'react-responsive';
 import { Link, useLocation } from "react-router-dom";
 import {publicRequest} from "../requestMethod"
-import { addProduct, updateQuantity } from '../Redux/CartRedux';
+import { addProduct, updateQuantity } from '../Redux/Cartredux';
 import { useDispatch, useSelector } from 'react-redux';
 
 

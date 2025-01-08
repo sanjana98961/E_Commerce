@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethod";
 import { Link, useNavigate} from "react-router-dom"
 import StripeCheckout from "react-stripe-checkout";
-import { removeProduct } from "../Redux/CartRedux";
+import { removeProduct } from "../Redux/Cartredux";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
