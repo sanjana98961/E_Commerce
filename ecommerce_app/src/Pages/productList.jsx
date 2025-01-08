@@ -37,18 +37,17 @@ const ProductList = () => {
     <div>
       <Navbar />
       <Announcement />
-      <h1 className="m-5 text-2xl">{cat}</h1>
-      <div className="flex justify-between m-5">
+      <h1 className="m-2 text-2xl">{cat}</h1>
+      <div className="flex justify-between">
         <div className="m-5 flex flex-col sm:flex-row sm:space-x-5">
           <span className="text-lg font-semibold mb-2 sm:mb-0">Filter Products:</span>
           <select name="color" onChange={handleFilter} className="p-2 border border-gray-300 rounded mb-2 sm:mb-0">
             <option value=" " selected disabled >Color</option>
             <option>white</option>
-            <option>black</option>
-            <option>red</option>
             <option>blue</option>
             <option>yellow</option>
             <option>green</option>
+            <option>golden</option>
           </select>
           <select name="size" onChange={handleFilter} className="p-2 border border-gray-300 rounded">
             <option value=" " selected disabled >Size</option>
@@ -63,7 +62,6 @@ const ProductList = () => {
           <span className="text-lg font-semibold mb-2 sm:mb-0">Sort Products:</span>
           <select onChange={(e)=>setSort(e.target.value)} className="p-2 border border-gray-300 rounded">
           <option value=" " selected disabled >Sort By</option>
-            <option value="newest" >Newest</option>
             <option value="asc">Price (asc)</option>
             <option value="desc">Price (desc)</option>
           </select>

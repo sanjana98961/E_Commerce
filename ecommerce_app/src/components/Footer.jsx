@@ -25,16 +25,15 @@ const Footer = () => {
                 <li id='ListItem' className='w-[50%] mb-2.5'>My Account</li>
                 <li id='ListItem' className='w-[50%] mb-2.5'>Order Tracking</li>
                 <li id='ListItem' className='w-[50%] mb-2.5'>Wishlist</li>
-                <li id='ListItem' className='w-[50%] mb-2.5'>Wishlist</li>
                 <li id='ListItem' className='w-[50%] mb-2.5'>Terms</li>
             </ul>
         </div>
         <div id='Right' className='flex-1 p-5 ' >
-            <div id='Title' className=''>Contact</div>
-            <div id='ContactItem' className='mb-5 flex items-center'>
-                <Room style={{marginRight:"10px"}}/>622 Dixie Path , South Tobinchester 98336
-                <Phone style={{marginRight:"10px"}}/>+1 234 56 78
-                <MailOutline style={{marginRight:"10px"}}/>contact@lama.dev
+            <div id='Title' className='text-[18px] font-bold mb-6'>Contact</div>
+            <div id='ContactItem' className='mb-5 flex flex-col items-start'>
+                <div><Room style={{marginRight:"10px"}}/> Noida, UP, India - 110022</div>
+                <div><Phone style={{marginRight:"10px"}}/>+1 234 56 78 </div>
+                <div><MailOutline style={{marginRight:"10px"}}/>contact@gamil.com </div>
             </div>
             <img id='PayementImage' className='w-[50%]' src="https://i.ibb.co/Qfvn4z6/payment.png"></img>
            

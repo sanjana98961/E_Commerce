@@ -18,7 +18,7 @@ const handleClick =(direction)=>{
 };
 
   return (
-    <div id='Container' className='flex w-[100%] h-[80vh] relative overflow-hidden '>
+    <div id='Container' className='mt-4 flex w-[100%] h-[80vh] relative overflow-hidden '>
         <div onClick={()=> handleClick("left")} id='ArrowLeft' className='h-[50px] w-[50px] flex items-center justify-center absolute m-[auto] rounded-[40%] bg-slate-400 top-0 bottom-0 left-[10px] z-[2] cursor-pointer traspa'><ArrowLeftOutlined/></div>
         <div id='Wrapper' className='h-[70vh] flex transition-all duration-[1s] ease-out' style={{ transform: `translateX(${slideIndex * -100}vw)`}}> 
             {sliderItems.map((item)=>(
@@ -29,9 +29,9 @@ const handleClick =(direction)=>{
                     <div id='InfoCOntainer' className='flex-1 p-[50px] '>
                         <h1 id='Title' className='text-[70px]'>{item.title}</h1>
                         <p id='Description' className='my-[50px] text-[20px] font-bold tracking-[3px]'>{item.description}</p>
-                        <Link to="/productlist">
+                        {/* <Link to="/productlist">
                         <button id='Button' className='p-[10px] text-[20px] cursor-pointer bg-green-200 rounded-[20%] '>SHOP NOW</button>
-                        </Link>
+                        </Link> */}
                     </div>
                 </div>
             ))}

@@ -12,8 +12,8 @@ import Login from './Login'
 const Home = () => {
   return (
     <div>
-        <Announcement/>
         <Navbar/>
+        <Announcement/>
         <Slider/>
         <Categories/>
         <Products/>

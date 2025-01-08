@@ -10,7 +10,7 @@ const cart = useSelector(state=> state.cart)
   return (
     <div className='h-[60px]' id='Container'>
         <div className='flex justify-between items-center' id='Wrapper'>
-            <div className='flex items-center flex-1' id='Left'>
+            {/* <div className='flex items-center flex-1' id='Left'>
                 <div className='size-[14] cursor-pointer ml-[5px]' id='Language'>
                     En
                 </div>
@@ -18,8 +18,8 @@ const cart = useSelector(state=> state.cart)
                   <input className='border-none' id='Input'></input>
                   <Search/>
                 </div>
-            </div>
-            <div className='items-center flex-1 flex justify-center ' id='Center'>
+            </div> */}
+            <div className='items-start flex-1 flex justify-start pl-4' id='Center'>
                 <Link to="/">
                     <span className='text-[30px] font-bold' id='Logo'>
                         Ecommerce Site
