@@ -34,6 +34,3 @@ app.listen(process.env.Port || 2000, ()=>{
     console.log(`Ecommerce_API is running on ${process.env.Port || 2000}`)
 })
 
-app.get('/api/hello', (req, res) => {
-    res.send({ message: 'Hello, API!' });
-  });
