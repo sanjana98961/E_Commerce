@@ -16,11 +16,9 @@ const Cart = ({item}) => {
   const [quantity, setQuantity] = useState(1);
 
   const cart = useSelector((state) => state.cart);
-  console.log({cart})
 
   const dispatch = useDispatch()
   const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-  console.log({totalItems});
 
   const totalValue = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   
@@ -29,8 +27,6 @@ const Cart = ({item}) => {
   const onToken = (token) => {
     setStripeToken(token);
   };
-
-  console.log({stripeToken})
 
   useEffect(() => {
     const makeRequest = async () => {
@@ -55,7 +51,6 @@ const Cart = ({item}) => {
     }else(
       setQuantity(quantity + 1)
     )
-    console.log({quantity})
    }
 
    const handleCartRemove = (id) => {
@@ -71,14 +66,16 @@ const Cart = ({item}) => {
       <div className="p-2 md:p-4">
         <h1 className="font-bold text-center text-3xl">YOUR BAG</h1>
         <div className="flex items-center justify-between p-2">
-          <div className="hidden md:flex">
-            <span className="font-bold text-xl mx-2">Shopping Cart Items</span>
-          </div>
-          <Link to="/productlist">
-            <button className="p-2 font-semibold text-blue-600 cursor-pointer bg-transparent border-none">
-              CONTINUE SHOPPING
-            </button>
-          </Link>
+        <div>
+          <span className="font-bold text-sm md:text-xl mx-2">Shopping Cart Items</span>
+        </div>
+
+        {/* Continue Shopping Button */}
+        <Link to="/productlist">
+          <button className="p-2 font-semibold text-blue-600 cursor-pointer bg-transparent rounded-md text-xs md:text-sm">
+            CONTINUE SHOPPING
+          </button>
+        </Link>
           {/* <div className="hidden md:flex">
             <span className="underline cursor-pointer mx-2">Shopping Bag({totalItems})</span>
             <span className="underline cursor-pointer mx-2">Your Wishlist (0)</span>
@@ -88,41 +85,68 @@ const Cart = ({item}) => {
           </button> */}
         </div>
         <div className="flex justify-between md:flex-row flex-col w-full"> {/* Ensures full width */}
-          <div className="flex-3 md:max-w-[70%] w-full"> {/* Adjusts the product section width */}
+          <div className="flex flex-col md:flex-3 md:max-w-[70%] w-full"> {/* Adjusts the product section width */}
             {cart?.map((product) => { 
-              console.log({product})
-              console.log({_id: product._id})
-              return(
-              <div className="flex justify-between p-2 border-b" key={product._id}>
-                <div className="flex-2 flex">
-                  <img src={product.img} alt={product.title} className="w-52" />
-                  <div className="flex flex-col justify-around p-4">
-                    <span>
-                      <b>Product:</b> {product.title}
-                    </span>
-                    <span>
-                      <b>ID:</b> {product._id}
-                    </span>
-                    <div className="w-5 h-5 rounded-full" style={{ backgroundColor: product.color }} />
-                    <span>
-                      <b>Size:</b> {product.size}
-                    </span>
-                    <button key={product.id} onClick={() => dispatch(removeProduct(product.id))} className="py-2 border rounded-lg bg-red-500">Remove</button>
+              return (
+                <div 
+                  className="flex flex-col md:flex-row justify-between p-2 border-b"
+                  key={product._id}
+                >
+                  <div className="flex flex-1 flex-col justify-between md:flex-row">
+                    <div className="flex flex-row items-center justify-center mt-4 md:mt-0">
+                      <img 
+                        src={product.img} 
+                        alt={product.title} 
+                        className="w-full md:w-52 object-cover" 
+                      />
+                      <div className="flex flex-col items-center justify-center mt-4 md:mt-0">
+                        <div className="flex items-center border-[4px] border-grey-500 mb-5">
+                          <Remove 
+                            style={{ cursor: "pointer" }} 
+                            onClick={() => handleQuantity("Decrease")} 
+                          />
+                          <span className="text-2xl mx-2">{product.quantity}</span>
+                          <Add 
+                            style={{ cursor: "pointer" }} 
+                            onClick={() => handleQuantity("Increase")} 
+                          />
+                        </div>
+                        <div className="text-3xl  font-light">
+                          ${product.price * product.quantity}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-col justify-around p-4">
+                      <span>
+                        <b>Product:</b> {product.title}
+                      </span>
+                      <span>
+                        <b>ID:</b> {product._id}
+                      </span>
+                      <div 
+                        className="w-5 h-5 rounded-full" 
+                        style={{ backgroundColor: product.color }} 
+                      />
+                      {/* <span>
+                        <b>Size:</b> {product.size}
+                      </span> */}
+                      <button 
+                        onClick={() => dispatch(removeProduct(product.id))} 
+                        className="py-2 border rounded-lg bg-red-500 text-white mt-2 md:mt-0"
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
+                  
                 </div>
-                <div className="flex-1 flex flex-col items-center justify-center">
-                  <div className="flex items-center mb-5">
-                    <Remove style={{cursor:"pointer"}} onClick={()=>handleQuantity("Decrease")} />
-                    <span className="text-2xl mx-2">{product.quantity}</span>
-                    <Add style={{cursor:"pointer"}} onClick={()=>handleQuantity("Increase")} />
-                  </div>
-                  <div className="text-3xl font-light">${product.price * product.quantity}</div>
-                </div>
-              </div>
-            )})}
-            <hr className="bg-gray-300 h-px border-none" />
+              );
+            })}
+            <hr className="bg-gray-300 h-px border-none mt-4" />
           </div>
-          <div className="flex-1 border border-gray-300 rounded-lg p-5 h-[50vh] max-w-[50]"> {/* Keep order summary narrower */}
+
+          <div className="flex-1 border border-gray-300 rounded-lg p-5 h-[75vh] max-w-[50]"> {/* Keep order summary narrower */}
             <h1 className="font-light text-2xl">ORDER SUMMARY</h1>
             <div className="my-7 flex justify-between">
               <span>Subtotal</span>

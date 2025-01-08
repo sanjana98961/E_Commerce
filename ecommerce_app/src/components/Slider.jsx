@@ -23,14 +23,22 @@ const handleClick =(direction)=>{
         <div id='Wrapper' className='h-[70vh] flex transition-all duration-[1s] ease-out' style={{ transform: `translateX(${slideIndex * -100}vw)`}}> 
             {sliderItems.map((item)=>(
                 <div id='Slide' className='flex items-center w-[100vw] h-[80vh]' style={{backgroundColor: item.bg}}>
-                    <div id='ImgContainer' className='flex-1 h-[100%] '>
-                        <img id='Image' className='h-[100%] rounded-[20px]' src={item.img}></img>
+                    <div id='ImgContainer' className='flex-1 h-full'>
+                        <img 
+                            id='Image' 
+                            className='h-full md:h-[100%] sm:h-auto rounded-[20px] object-cover' 
+                            src={item.img} 
+                            alt={item.title}
+                        />
                     </div>
-                    <div id='InfoCOntainer' className='flex-1 p-[50px] '>
-                        <h1 id='Title' className='text-[70px]'>{item.title}</h1>
-                        <p id='Description' className='my-[50px] text-[20px] font-bold tracking-[3px]'>{item.description}</p>
+
+                    <div id='InfoContainer' className='flex-1 p-8 md:p-16'>
+                        <h1 id='Title' className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl'>{item.title}</h1>
+                        <p id='Description' className='my-6 sm:my-8 text-lg sm:text-xl font-semibold tracking-wide'>{item.description}</p>
                         {/* <Link to="/productlist">
-                        <button id='Button' className='p-[10px] text-[20px] cursor-pointer bg-green-200 rounded-[20%] '>SHOP NOW</button>
+                        <button id='Button' className='p-3 text-lg sm:text-xl cursor-pointer bg-green-200 rounded-full'>
+                            SHOP NOW
+                        </button>
                         </Link> */}
                     </div>
                 </div>
@@ -44,3 +52,5 @@ const handleClick =(direction)=>{
 }
 
 export default Slider
+
+
